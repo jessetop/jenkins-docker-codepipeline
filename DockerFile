@@ -1,4 +1,2 @@
-# From the official jenkins github documentation
-# https://github.com/jenkinsci/docker
 FROM jenkins/jenkins:lts
 COPY --chown=jenkins:jenkins executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
