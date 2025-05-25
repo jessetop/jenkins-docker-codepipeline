@@ -1,0 +1,9 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - echo "Pulling image from Docker Hub..."
+      - docker pull jenkins/jenkins:lts-jdk17
+      - echo "Building and tagging image..."
+      - docker tag 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:lts-v1 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:lts-v1
+      - docker push 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:latest
