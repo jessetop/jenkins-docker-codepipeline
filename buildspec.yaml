@@ -2,6 +2,8 @@ version: 0.2
 phases:
   build:
     commands:
+      - echo "Installing docker"
+      - sudo yum install -y docker
       - echo "Pulling image from Docker Hub..."
       - docker pull jenkins/jenkins:lts-jdk17
       - echo "Building and tagging image..."
