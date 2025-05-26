@@ -1,5 +1,8 @@
 version: 0.2
 phases:
-  build:    
+  build:
     commands:
-      - echo "Installing docker"
+      - docker build -f Dockerfile -t 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:custom_docker_ecr_latest
+artifacts:
+  files:
+    - '**/*'
