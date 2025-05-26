@@ -1,6 +1,8 @@
-
+# Have to make sure to set permissions for the CodeBuild service role to access ECR
+# https://docs.aws.amazon.com/codebuild/latest/userguide/sample-docker.html
 version: 0.2
 phases:
+  
   pre_build:
     commands:
       - echo "Installing docker"
@@ -9,3 +11,18 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 755231492286.dkr.ecr.us-east-1.amazonaws.com
       - echo "Logged in successfully"
   
+  build:    
+    commands:
+      - echo "Building and tagging image..."
+      - cd ./docker_example
+      - docker build -f Dockerfile -t 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:custom_docker_ecr_latest
+      - docker tag jenkins/jenkins:lts-jdk17 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:custom_docker_ecr_latest
+
+  post_build:
+    commands:
+      - echo "Pushing image to ECR"
+      - docker push 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:latest
+      
+artifacts:
+  files:
+      - '**/*'
