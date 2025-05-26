@@ -1,25 +1,17 @@
 version: 0.2
 phases:
-  
-  pre_build:
+  build:    
     commands:
       - echo "Installing docker"
       - sudo yum install -y docker
       - echo "Logging into Amazon ECR..."
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 755231492286.dkr.ecr.us-east-1.amazonaws.com
       - echo "Logged in successfully"
-  
-  build:    
-    commands:
       - echo "Building and tagging image..."
       - docker build -f Dockerfile -t 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:custom_docker_ecr_latest
       - docker tag jenkins/jenkins:lts-jdk17 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:custom_docker_ecr_latest
-
-  post_build:
-    commands:
       - echo "Pushing image to ECR"
       - docker push 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:latest
-
 artifacts:
   files:
       - '**/*'
