@@ -19,7 +19,6 @@ phases:
     commands:
       - echo "Pushing image to ECR"
       - docker push 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:latest
-
 artifacts:
   files:
     - '**/*'
