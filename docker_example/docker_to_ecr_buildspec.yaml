@@ -13,7 +13,7 @@ phases:
     commands:
       - echo "Building and tagging image..."
       - cd ./docker_example
-      - docker build -f Dockerfile -t 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:custom_docker_ecr_latest
+      - docker build -f $CODEBUILD_SRC_DIR/docker_example/Dockerfile -t 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:custom_docker_ecr_latest
       - docker tag jenkins/jenkins:lts-jdk17 755231492286.dkr.ecr.us-east-1.amazonaws.com/jenkins:custom_docker_ecr_latest
   post_build:
     commands:
