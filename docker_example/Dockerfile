@@ -1,10 +1,6 @@
 FROM jenkins/jenkins:lts
-RUN "echo hello"
-RUN "pwd"
 WORKDIR /usr/local/app
-RUN "pwd"
 COPY src ./src
-RUN "pwd"
 
 COPY --chown=jenkins:jenkins executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
 
